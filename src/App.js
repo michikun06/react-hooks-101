@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const App = props => {
   // nameとpriceのstateを作成
@@ -7,6 +7,21 @@ const App = props => {
   // 外部で設定したものを次の一行でまとめて引っ張ってこれる
   const [state, setState] = useState(props)
   const { name, price } = state
+
+  // return内のレンダリングの後で呼ばれる
+  useEffect(() => {
+    console.log('This is like componentDidMount');
+  })
+
+  // 空の配列を入れると最初の読み込みのとこのみ読み込まれる
+  useEffect(() => {
+    console.log('This is like componentDidMountwwwwwwww');
+  }, [])
+
+  // 最初のレンダリング＋nameが読み込まれる時のみ呼ばれる
+  useEffect(() => {
+    console.log('This is like componentDidMount of name');
+  }, [name])
 
   return (
     <>
