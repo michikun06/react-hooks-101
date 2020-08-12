@@ -25,7 +25,14 @@ const App = () => {
     setBody('')
   }
 
-  console.log({ state })
+  const deleteAllEvents = e => {
+    e.preventDefault()
+    const result = window.confirm("全てのイベントを本当に削除してもよろしいですか？")
+    if (result) dispatch({ type: 'DELETE_ALL_EVENTS' })
+  }
+
+  // タイトルorボディが空の場合unCreatableが発動　→　「イベントを作成する」ボタンが非活性状態
+  const unCreatable = title === '' || body === ''
 
   return (
     <div className="container-fluid">
@@ -40,8 +47,8 @@ const App = () => {
           <label htmlFor="forEventBody">ボディー</label>
           <textarea className="form-control" id="forEventBody" value={body} onChange={e => setBody(e.target.value)} />
         </div>
-        <button className="btn btn-primary" onClick={addEvent}>イベントを作成する</button>
-        <button className="btn btn-danger">全てのイベントを削除する</button>
+        <button className="btn btn-primary" onClick={addEvent} disabled={unCreatable}>イベントを作成する</button>
+        <button className="btn btn-danger" onClick={deleteAllEvents} disabled={state.length === 0}>全てのイベントを削除する</button>
       </form>
 
       <h4>イベント一覧</h4>
