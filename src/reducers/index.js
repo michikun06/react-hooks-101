@@ -61,7 +61,8 @@ const events = (state = [], action) => {
 
         // 配列内の指定したTodoを削除する。
         case 'DELETE_EVENT':
-            return state
+            // 削除依頼が行われたid意外をReturnすることで削除ボタンが押されたTodoを表示しないようにする
+            return state.filter(event => event.id !== action.id)
 
         // 配列内の全てのTodoを削除する。
         case 'DELETE_EVENTS':
