@@ -1,11 +1,16 @@
 import React from 'react'
 
+// DELETE_EVENTがタイポの場合エラーが出ずにバグが発生し、見つけるのが困難
+// 下記のように外部から入れることでタイポ、バグを即座に発見することができる
+import { DELETE_EVENT } from '../actions'
+
 const Event = ({ event, dispatch }) => {
     const id = event.id
     // 個別のイベントを削除
     const handleClickDeleteButton = () => {
         const result = window.confirm(`イベント(id : ${id})を本当に削除してもよろしいですか？`)
-        if (result) dispatch({ type: "DELETE_EVENT", id })
+        // importしたDELETE_EVENTを利用することで、バグを発見しやすくなる
+        if (result) dispatch({ type: DELETE_EVENT, id })
     }
 
     return (

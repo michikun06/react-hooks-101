@@ -1,3 +1,9 @@
+import {
+    CREATE_EVENT,
+    DELETE_EVENT,
+    DELETE_ALL_EVENTS
+} from "../actions";
+
 // action={
 //      type: 'CREATE_EVENTS',
 //      title: '2020年東京オリンピックについてのお知らせ',
@@ -43,7 +49,7 @@ const events = (state = [], action) => {
     switch (action.type) {
 
         // 配列に新たなTodoを追加する。
-        case 'CREATE_EVENT':
+        case CREATE_EVENT:
 
             // ActionCreatorにて作成された「title」と「body」を定義したeventに入れておく
             const event = { title: action.title, body: action.body }
@@ -60,12 +66,12 @@ const events = (state = [], action) => {
 
 
         // 配列内の指定したTodoを削除する。
-        case 'DELETE_EVENT':
+        case DELETE_EVENT:
             // 削除依頼が行われたid意外をReturnすることで削除ボタンが押されたTodoを表示しないようにする
             return state.filter(event => event.id !== action.id)
 
         // 配列内の全てのTodoを削除する。
-        case 'DELETE_ALL_EVENTS':
+        case DELETE_ALL_EVENTS:
             return []
 
         default:
