@@ -1,7 +1,6 @@
 import {
     ADD_OPERATION_LOG,
     DELETE_ALL_OPERATION_LOGS,
-    DELETE_ALL_EVENTS
 } from '../actions'
 
 const operationLogs = (state = [], action) => {
