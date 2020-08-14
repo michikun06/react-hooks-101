@@ -2,8 +2,12 @@ import React, { useContext } from 'react'
 
 // DELETE_EVENTがタイポの場合エラーが出ずにバグが発生し、見つけるのが困難
 // 下記のように外部から入れることでタイポ、バグを即座に発見することができる
-import { DELETE_EVENT } from '../actions'
+import {
+    ADD_OPERATION_LOG,
+    DELETE_EVENT
+} from '../actions'
 import AppContext from '../contexts/AppContext'
+import { timeCurrentIso8601 } from "../utils";
 
 const Event = ({ event }) => {
     const { dispatch } = useContext(AppContext)
@@ -12,7 +16,15 @@ const Event = ({ event }) => {
     const handleClickDeleteButton = () => {
         const result = window.confirm(`イベント(id : ${id})を本当に削除してもよろしいですか？`)
         // importしたDELETE_EVENTを利用することで、バグを発見しやすくなる
-        if (result) dispatch({ type: DELETE_EVENT, id })
+        if (result) {
+            dispatch({ type: DELETE_EVENT, id })
+
+            dispatch({
+                type: ADD_OPERATION_LOG,
+                description: `イベント(id=${id})を削除しました。`,
+                operatedAt: timeCurrentIso8601()
+            })
+        }
     }
 
     return (
