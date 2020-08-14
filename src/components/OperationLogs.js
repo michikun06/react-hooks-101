@@ -4,7 +4,7 @@ import OperationLog from './OperationLog'
 import AppContext from '../contexts/AppContext'
 
 const OperationLogs = () => {
-    const { state, dispatch } = useContext(AppContext)
+    const { state } = useContext(AppContext)
     return (
         <>
             <h4>操作ログ一覧</h4>
